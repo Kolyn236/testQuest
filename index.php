@@ -13,5 +13,5 @@ spl_autoload_register(function ($class) {
 
 
 $app = new \app\App();
-$app->connectDB();
+
 $app->showView('index');

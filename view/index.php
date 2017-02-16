@@ -1,4 +1,10 @@
+<?php 
+use library\dataBase;
+$model = new dataBase();
 
+$model->insertRow('/application', time());
+
+?>
 <html>
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -6,6 +12,10 @@
 
 </head>
 <body>
+
+
+<input type="button" class="dataBase" value="ОТправить запрос"/>
+
 
 <input type="file" multiple="multiple" accept=".txt,image/*">
 <a href="#" class="submit button">Загрузить файлы</a>
