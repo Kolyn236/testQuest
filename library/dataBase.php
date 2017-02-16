@@ -24,12 +24,14 @@ class dataBase
             die('Ошибка подключения');
         }
         $this->mysqliOb = $mysqli;
+        #При создании обьекта сразу создаём таблицу, 
+        $this->insertTable();
     }
     public function insertTable(){
         if($this->mysqliOb->query("CREATE TABLE IF NOT EXISTS pops (id INT , path VARCHAR (45), date DATE)")){
-            echo "Запись в БД произведена успешно";
+            echo "Таблица в БД создана успешно, либо таблица уже существует";
         }else{
-            die('Ошибка, не удаётся создать таблицу, либо она уже существует');
+            die('Ошибка, не удаётся создать таблицу');
         }
     }
     public function insertRow($path,$date){
@@ -45,13 +47,20 @@ class dataBase
         $result = $this->mysqliOb->query($sql);
 
         if ($result->num_rows > 0) {
-            // output data of each row
             while($row = $result->fetch_assoc()) {
                 echo "id: " . $row["id"]. " - Path: " . $row["path"]. " " . $row["date"]. "<br>";
             }
         } else {
             echo "0 results";
         }
-
+    }
+    public function deleteRow($id){
+        $sql = "DELETE FROM pops WHERE id=%d";
+        $query = sprintf($sql,$id);
+        if($this->mysqliOb->query($query)){
+            echo "Запрос выполнен успешно";
+        }else{
+            echo "Запрос не выполнен";
+        }
     }
 }
