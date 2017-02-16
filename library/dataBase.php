@@ -40,4 +40,18 @@ class dataBase
         }else die('произошла ошибка');
 
     }
+    public function readTable(){
+        $sql = "SELECT id, path, date FROM pops";
+        $result = $this->mysqliOb->query($sql);
+
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo "id: " . $row["id"]. " - Path: " . $row["path"]. " " . $row["date"]. "<br>";
+            }
+        } else {
+            echo "0 results";
+        }
+
+    }
 }

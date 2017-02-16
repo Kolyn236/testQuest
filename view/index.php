@@ -2,8 +2,8 @@
 use library\dataBase;
 $model = new dataBase();
 
-$model->insertRow('/application', time());
 
+$model->readTable();
 ?>
 <html>
 <head>
