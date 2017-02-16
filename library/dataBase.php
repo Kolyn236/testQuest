@@ -25,7 +25,7 @@ class dataBase
         }
         $this->mysqliOb = $mysqli;
         #При создании обьекта сразу создаём таблицу, 
-        $this->insertTable();
+        #$this->insertTable();
     }
     public function insertTable(){
         if($this->mysqliOb->query("CREATE TABLE IF NOT EXISTS pops (id INT , path VARCHAR (45), date DATE)")){

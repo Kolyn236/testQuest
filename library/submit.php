@@ -1,8 +1,9 @@
 <?php
 
+include_once "dataBase.php";
 
+$mysqli = new library\dataBase();
 
-use library\dataBase;
 
 
 
@@ -11,7 +12,7 @@ if (isset($_GET['uploadfiles'])) {
     $files = array();
     $uploaddir = "../images/"; // . - текущая папка где находится submit.php
 
-   # $mysqli = new dataBase();
+
 
     // Создадим папку если её нет
 
@@ -22,7 +23,7 @@ if (isset($_GET['uploadfiles'])) {
         if (move_uploaded_file($file['tmp_name'], $uploaddir . basename($file['name']))) {
             $files[] = realpath($uploaddir . $file['name']);
             $ffile = realpath($uploaddir . $file['name']);
-        #   $mysqli->insertRow($ffile, date("His"));
+           $mysqli->insertRow($ffile, date("Ymd"));
         } else {
             $error = true;
         }
