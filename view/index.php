@@ -16,10 +16,6 @@ $arItems = $model->readTable();
 
 <input type="button" class="dataBase" value="ОТправить запрос"/>
 <?php
-
-
-
-
 echo "<pre>";
 print_r($arItems);
 echo "</pre>";

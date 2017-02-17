@@ -60,11 +60,8 @@ class dataBase
         $result = $this->mysqliOb->query($sql);
 
         if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                #echo "id: " . $row["id"] . " - Path: " . $row["path"] . " " . $row["date"] . "<br>";
-
-                #return $arItems[$row["id"]][] = [$row["id"],$row["path"],$row["date"]];
-            }
+            for ($set = array (); $row = $result->fetch_assoc(); $set[] = $row);
+            return $set;
         } else {
             echo "0 results";
         }
