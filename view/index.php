@@ -3,7 +3,6 @@ use library\dataBase;
 $model = new dataBase();
 
 
-$model->readTable();
 ?>
 <html>
 <head>

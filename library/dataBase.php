@@ -9,7 +9,8 @@ namespace library;
  */
 class dataBase
 {
-    public  $mysqliOb;
+    public $mysqliOb;
+
     function __construct()
     {
         $db_host = "localhost";
@@ -25,41 +26,54 @@ class dataBase
         }
         $this->mysqliOb = $mysqli;
         #При создании обьекта сразу создаём таблицу, 
-        #$this->insertTable();
+        $this->insertTable();
     }
-    public function insertTable(){
-        if($this->mysqliOb->query("CREATE TABLE IF NOT EXISTS pops (id INT , path VARCHAR (45), date DATE)")){
+
+    public function insertTable()
+    {
+        if ($this->mysqliOb->query("CREATE TABLE IF NOT EXISTS pops (
+        ID int NOT NULL AUTO_INCREMENT ,
+        path VARCHAR (45),
+        date DATE,
+        PRIMARY KEY (ID))")
+        ) {
             echo "Таблица в БД создана успешно, либо таблица уже существует";
-        }else{
+        } else {
             die('Ошибка, не удаётся создать таблицу');
         }
     }
-    public function insertRow($path,$date){
+
+    public function insertRow($path, $date)
+    {
         $t = "INSERT INTO pops (path,date) VALUES('%s','%s')";
-        $query = sprintf($t,$path,$date);
-        if($this->mysqliOb->query($query)){
+        $query = sprintf($t, $path, $date);
+        if ($this->mysqliOb->query($query)) {
             echo 'Запись успешно произведена';
-        }else die('произошла ошибка');
+        } else die('произошла ошибка');
 
     }
-    public function readTable(){
+
+    public function readTable()
+    {
         $sql = "SELECT id, path, date FROM pops";
         $result = $this->mysqliOb->query($sql);
 
         if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                echo "id: " . $row["id"]. " - Path: " . $row["path"]. " " . $row["date"]. "<br>";
+            while ($row = $result->fetch_assoc()) {
+                echo "id: " . $row["id"] . " - Path: " . $row["path"] . " " . $row["date"] . "<br>";
             }
         } else {
             echo "0 results";
         }
     }
-    public function deleteRow($id){
+
+    public function deleteRow($id)
+    {
         $sql = "DELETE FROM pops WHERE id=%d";
-        $query = sprintf($sql,$id);
-        if($this->mysqliOb->query($query)){
+        $query = sprintf($sql, $id);
+        if ($this->mysqliOb->query($query)) {
             echo "Запрос выполнен успешно";
-        }else{
+        } else {
             echo "Запрос не выполнен";
         }
     }
