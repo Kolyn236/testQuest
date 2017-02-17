@@ -8,7 +8,11 @@ $arItems = $model->readTable();
 <html>
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-
+<style>
+    .admin-table{
+        border: 5px;
+    }
+</style>
 
 </head>
 <body>
@@ -20,6 +24,26 @@ echo "<pre>";
 print_r($arItems);
 echo "</pre>";
 ?>
+<table class="admin-table">
+    <tr>
+        <th>id</th>
+        <th>Путь</th>
+        <th>Дата</th>
+        <th></th>
+        <th></th>
+
+    </tr>
+    <h3><?php foreach($arItems as $a): ?></h3>
+    <tr>
+        <td><?=$a['id']?></td>
+        <td><?=$a['path']?></td>
+        <td><?=$a['date']?></td>
+        <td><a href="index.php?action=edit&id=><?=$a['id']?>">Редактировать</a></td>
+        <td><a href="index.php?action=delete&id=><?=$a['id']?>">Удалить</a></td>
+
+    </tr>
+    <?php endforeach ?>
+</table>
 
 <input type="file" multiple="multiple" accept=".txt,image/*">
 <a href="#" class="submit button">Загрузить файлы</a>
