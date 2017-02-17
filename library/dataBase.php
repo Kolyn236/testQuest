@@ -26,7 +26,7 @@ class dataBase
         }
         $this->mysqliOb = $mysqli;
         #При создании обьекта сразу создаём таблицу, 
-        $this->insertTable();
+        #$this->insertTable();
     }
 
     public function insertTable()
@@ -55,12 +55,15 @@ class dataBase
 
     public function readTable()
     {
+        $arItems = [];
         $sql = "SELECT id, path, date FROM pops";
         $result = $this->mysqliOb->query($sql);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                echo "id: " . $row["id"] . " - Path: " . $row["path"] . " " . $row["date"] . "<br>";
+                #echo "id: " . $row["id"] . " - Path: " . $row["path"] . " " . $row["date"] . "<br>";
+
+                #return $arItems[$row["id"]][] = [$row["id"],$row["path"],$row["date"]];
             }
         } else {
             echo "0 results";

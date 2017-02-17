@@ -1,8 +1,9 @@
 <?php 
 use library\dataBase;
 $model = new dataBase();
-
-
+$arItems = [];
+#$model->insertRow("/images33/image.jpg", date("Ymd"));
+$arItems = $model->readTable();
 ?>
 <html>
 <head>
@@ -14,7 +15,15 @@ $model = new dataBase();
 
 
 <input type="button" class="dataBase" value="ОТправить запрос"/>
+<?php
 
+
+
+
+echo "<pre>";
+print_r($arItems);
+echo "</pre>";
+?>
 
 <input type="file" multiple="multiple" accept=".txt,image/*">
 <a href="#" class="submit button">Загрузить файлы</a>

@@ -1,8 +1,11 @@
 <?php
 
-include_once "dataBase.php";
+namespace library;
 
-$mysqli = new library\dataBase();
+use library\dataBase;
+
+
+$mysqli = new dataBase();
 
 
 
