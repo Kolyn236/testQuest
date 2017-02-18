@@ -9,6 +9,12 @@ if(isset($_GET["action"])) {
     if ($_GET["action"] == "delete") {
         $model->deleteRow($_GET["id"]);
 
+    }/*elseif ($_GET["action"] == "insert"){
+        $model->insertRow($_POST["name"], date("Ymd"));
+    }*/
+}elseif(isset($_POST["action"])){
+    if($_POST["action"] == "insert"){
+        $model->insertRow($_POST["name"], date("Ymd"));
     }
 }
 ?>
@@ -21,17 +27,22 @@ if(isset($_GET["action"])) {
 </head>
 <body>
 
+<?php
 
-
+print_r($_POST)?>
+<div class="container"><a href="index.php">Обновить страницу</a></div>
 
 <div class="container">
     <table class="table">
         <tr>
             <th>id</th>
             <th>Путь</th>
+
             <th>Дата</th>
 
-            <th></th>
+            <th><a href="index.php?action=insert">Вставить </a></th>
+            
+
 
         </tr>
         <h3><?php foreach ($arItems as $a): ?></h3>
@@ -41,6 +52,7 @@ if(isset($_GET["action"])) {
             <td><?= $a['date'] ?></td>
             <!--<td><a href="index.php?action=edit&id=><?/*= $a['id'] */?>">Редактировать</a></td>-->
             <td><a href="index.php?action=delete&id=<?= $a['id'] ?>">Удалить</a></td>
+            <td></td>
 
         </tr>
         <?php endforeach ?>
@@ -51,6 +63,16 @@ if(isset($_GET["action"])) {
 <input type="file" multiple="multiple" accept=".txt,image/*">
 <a href="#" class="submit button">Загрузить файлы</a>
 <div class="ajax-respond"></div>
+
+<form name="test" method="post" action="index.php">
+    <p><b>Введите путь:</b><br>
+        <input type="text" name="name" size="40"/>
+    </p>
+
+
+    <p><input type="submit"  value="Отправить">
+
+</form>
 
 <script>
 

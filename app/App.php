@@ -11,13 +11,8 @@ namespace app;
 
 class App
 {
-
- 
-
-    public function showView($view){
-        include_once 'view/'.$view.'.php';
+    public function showView($view)
+    {
+        include_once 'view/' . $view . '.php';
     }
-
-
-
 }
