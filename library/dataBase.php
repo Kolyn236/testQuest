@@ -37,7 +37,7 @@ class dataBase
         date DATE,
         PRIMARY KEY (ID))")
         ) {
-            echo "Таблица в БД создана успешно, либо таблица уже существует";
+            echo '';
         } else {
             die('Ошибка, не удаётся создать таблицу');
         }
@@ -48,14 +48,13 @@ class dataBase
         $t = "INSERT INTO pops (path,date) VALUES('%s','%s')";
         $query = sprintf($t, $path, $date);
         if ($this->mysqliOb->query($query)) {
-            echo 'Запись успешно произведена';
+            echo '';
         } else die('произошла ошибка');
 
     }
 
     public function readTable()
     {
-        $arItems = [];
         $sql = "SELECT id, path, date FROM pops";
         $result = $this->mysqliOb->query($sql);
 
@@ -63,7 +62,7 @@ class dataBase
             for ($set = array (); $row = $result->fetch_assoc(); $set[] = $row);
             return $set;
         } else {
-            echo "0 results";
+            echo '';
         }
     }
 
@@ -72,7 +71,7 @@ class dataBase
         $sql = "DELETE FROM pops WHERE id=%d";
         $query = sprintf($sql, $id);
         if ($this->mysqliOb->query($query)) {
-            echo "Запрос выполнен успешно";
+            echo "";
         } else {
             echo "Запрос не выполнен";
         }

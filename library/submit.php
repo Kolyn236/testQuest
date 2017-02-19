@@ -1,7 +1,6 @@
 <?php
 
-namespace library;
-
+require_once 'dataBase.php';
 use library\dataBase;
 
 

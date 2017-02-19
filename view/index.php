@@ -5,18 +5,49 @@ $model = new dataBase();
 $arItems = [];
 #$model->insertRow("/images33/image.jpg", date("Ymd"));
 $arItems = $model->readTable();
-if(isset($_GET["action"])) {
+
+
+
+if(isset($_GET['action']))
+    $action = $_GET['action'];
+else
+    $action = "";
+if($action == "add")
+{
+    if(!empty($_POST)){
+        $model->insertRow($_POST['path'],date("Ymd"));
+        header ("Location: index.php");
+    }
+}/*else if($action == "edit"){
+    if(!isset($_GET['id']))
+        header("Location: index.php");
+    $id = (int)$_GET['id'];
+
+    if(!empty($_POST)&& $id > 0){
+        articles_edit($link, $id , $_POST['title'], $_POST['date'], $_POST['content']);
+        header ("Location: index.php");
+    }
+
+    $article = articles_get($link,$id);
+    include("../views/article_admin.php");
+}else{
+    $articles = articles_all($link);
+    include("../views/articles_admin.php");
+}*/
+
+
+/*if(isset($_GET["action"])) {
     if ($_GET["action"] == "delete") {
         $model->deleteRow($_GET["id"]);
 
-    }/*elseif ($_GET["action"] == "insert"){
+    }elseif ($_GET["action"] == "insert"){
         $model->insertRow($_POST["name"], date("Ymd"));
-    }*/
+    }
 }elseif(isset($_POST["action"])){
     if($_POST["action"] == "insert"){
         $model->insertRow($_POST["name"], date("Ymd"));
     }
-}
+}*/
 ?>
 <html>
 <head>
@@ -40,7 +71,7 @@ print_r($_POST)?>
 
             <th>Дата</th>
 
-            <th><a href="index.php?action=insert">Вставить </a></th>
+            <th><a href="index.php?action=insert&name=<?php echo $_POST["name"]?>">Вставить </a></th>
             
 
 
@@ -63,16 +94,25 @@ print_r($_POST)?>
 <input type="file" multiple="multiple" accept=".txt,image/*">
 <a href="#" class="submit button">Загрузить файлы</a>
 <div class="ajax-respond"></div>
-
-<form name="test" method="post" action="index.php">
-    <p><b>Введите путь:</b><br>
-        <input type="text" name="name" size="40"/>
-    </p>
-
-
-    <p><input type="submit"  value="Отправить">
-
-</form>
+<hr>
+<div class="container">
+    <h1>Общая страница</h1>
+    <div>
+        <form method="post" action="index.php?action=<?=$_GET['action']?>&id=<?=$_GET['id']?>">
+            <label class="container">
+                Название
+                <input type="text" name="path" value="" class="form-item" autofocus required>
+            </label>
+            <p><label class="container">
+                    <input type="date" name="date" value="" class="form-item" required>
+                </label></p>
+            <label class="container">
+                Содержимое
+                <textarea class="form-item" name="content" required></textarea>
+            </label>
+            <input type="submit" value="Сохранить" class="btn">
+        </form>
+    </div>
 
 <script>
 
@@ -130,6 +170,9 @@ print_r($_POST)?>
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
+                console.log(respond);
+                console.log(textStatus);
+                console.log(jqXHR);
                 console.log('ОШИБКИ AJAX запроса: ' + textStatus);
             }
         });

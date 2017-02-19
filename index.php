@@ -10,7 +10,7 @@ spl_autoload_register(function ($class) {
 });
 
 
-
+# когда создаю обьект да да да
 
 $app = new \app\App();
 
